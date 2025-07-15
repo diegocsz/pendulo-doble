@@ -28,7 +28,13 @@ while oporto.dato_actual is None:
     time.sleep(0.1)
 print("✅ Dato recibido, iniciando visualización.")
 
+# Estado para animar ligeramente el segundo péndulo
+angulo2 = 0
+velocidad2 = 0
+
 def animate(frame):
+    global angulo2, velocidad2
+
     th1 = oporto.dato_actual
     if th1 is None:
         return line,
@@ -38,19 +44,23 @@ def animate(frame):
     x1 = L1 * sin(angle1)
     y1 = -L1 * cos(angle1)
 
-    # Segundo péndulo (simplemente colgando recto desde el primero)
-    angle2 = 0  # suelto, vertical
-    x2 = x1 + L2 * sin(angle2)
-    y2 = y1 - L2 * cos(angle2)
+    # Simular oscilación inducida del segundo péndulo
+    # Simple dinámica: el segundo péndulo se "arrastra" con retardo
+    objetivo = angle1  # dirección hacia donde quiere ir
+    velocidad2 += 0.05 * (objetivo - angulo2)  # aceleración proporcional
+    velocidad2 *= 0.95  # fricción
+    angulo2 += velocidad2
+
+    x2 = x1 + L2 * sin(angulo2)
+    y2 = y1 - L2 * cos(angulo2)
 
     histx.append(x2)
     histy.append(y2)
 
-    # Dibujar ambos
     line.set_data([x0, x1, x2], [y0, y1, y2])
     trace.set_data(histx[-500:], histy[-500:])
     return line, trace
 
 ani = FuncAnimation(fig, animate, interval=50, blit=True)
-plt.title("🎯 Péndulo doble en tiempo real (solo 1 ángulo)")
+plt.title("🎯 Péndulo doble en tiempo real (con oscilación dependiente)")
 plt.show()
