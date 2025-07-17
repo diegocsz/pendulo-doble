@@ -66,17 +66,25 @@ def animate(frame):
     th1 = radians(th1_deg)
     x1 = L1 * sin(th1)
     y1 = -L1 * cos(th1)
-
+    
+    #50ms para una animación de 20fps
     dt = 0.05
 
+    #Torque
     torque = -m2 * g * L2 * sin(th2) + 0.3 * sin(th1 - th2)
+    #Momento de Inercia
     inertia = m2 * L2**2
+    #Segunda Ley de Newton
     acc2 = torque / inertia
 
+    #Integrar la aceleración angular para obtener velocidad angular
     vel2 += acc2 * dt
+    #Establecer la fricción 0.7 para que finalice como el modelo real
     vel2 *= 0.93
+    #Integrar la velocidad angular para llamar el desplazamiento angular
     th2 += vel2 * dt
-
+    
+    #Calcular la posición en base a
     x2 = x1 + L2 * sin(th2)
     y2 = y1 - L2 * cos(th2)
 
@@ -84,8 +92,10 @@ def animate(frame):
     vy1 = L1 * vel2 * sin(th1)
     vx2 = vx1 + L2 * vel2 * cos(th2)
     vy2 = vy1 + L2 * vel2 * sin(th2)
-
+    
+    #Energía cinética tota
     T = 0.5 * m1 * (vx1**2 + vy1**2) + 0.5 * m2 * (vx2**2 + vy2**2)
+    #Energía potencial total
     V = m1 * g * y1 + m2 * g * y2
 
     text_energy.set_text(text_template_energy.format(T, V))

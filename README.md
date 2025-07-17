@@ -16,7 +16,7 @@ Simple curiosidad.
 ## Licencia
 ## Créditos
 Grupo de Mecánica Clásica ciclo 3 de la Universidad Tecnológica del Perú.
-Especialmente a la compañera que sugirió el tema y sin ella no habría sido posible nada del presente proyecto.
+Especialmente a la compañera que sugirió el tema y sin ella no habría sido posible nada del presente proyecto ni tendría las ganas de seguir mejorándolo.
 ## Tareas
 - Documentar y mejorar.
 - Cambiar de lugar el sensor al segundo péndulo para mayor eficiencia.
