@@ -63,7 +63,10 @@ def animate(frame):
     if th1_deg is None:
         return line, trace, text_energy, text_lagrange
 
+    #Angulo en radianes para operar
     th1 = radians(th1_deg)
+
+    #Posición en x,y del primer péndulo
     x1 = L1 * sin(th1)
     y1 = -L1 * cos(th1)
     
@@ -88,6 +91,7 @@ def animate(frame):
     x2 = x1 + L2 * sin(th2)
     y2 = y1 - L2 * cos(th2)
 
+    #Velocidades angulares
     vx1 = L1 * vel2 * cos(th1)
     vy1 = L1 * vel2 * sin(th1)
     vx2 = vx1 + L2 * vel2 * cos(th2)

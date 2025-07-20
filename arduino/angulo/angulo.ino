@@ -31,6 +31,7 @@ void loop() {
   sensor.getAcceleration(&ax, &ay, &az);
   sensor.getRotation(&gx, &gy, &gz);
   
+  // Necesito un nombre para esto ¿variación del tiempo?
   dt = (millis()-tiempo_prev)/1000.0;
   tiempo_prev=millis();
   
@@ -42,7 +43,7 @@ void loop() {
   ang_x = 0.98*(ang_x_prev+(gx/131)*dt) + 0.02*accel_ang_x;
   ang_y = 0.98*(ang_y_prev+(gy/131)*dt) + 0.02*accel_ang_y;
   
-  
+  // Reasignación
   ang_x_prev=ang_x;
   ang_y_prev=ang_y;
 
@@ -53,6 +54,8 @@ void loop() {
   //Serial.print("tRotacion en Y: ");
   //Serial.println(ang_y+7.10);
   //Serial.println(sqrt(pow(ang_x+2.80, 2) + pow(ang_y+7.10, 2)));
+
+  // Función Arcotangente de dos parámetros y luego convertido en grados para ir de -180 a 180 grados
   Serial.println(atan2(ay+2.80, az+7.10) * (180.0 / PI));
 
   delay(10);
